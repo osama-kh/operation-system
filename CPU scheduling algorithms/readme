@@ -1,0 +1,22 @@
+The authors' contact information : 
+	name : osama khwaled, mohammed hammad
+
+Description:
+	The main idea of the project is to implement the following CPU scheduling algorithms.
+                1. First Come First Serve.
+                2. Shortest Job First.
+                3. Highest Response Ratio Next.
+                4. Round Robin.
+                5. Multilevel Scheduling with Shortest Job First.
+            The program reads a list of tasks from a file and then schedules them based on the chosen scheduling algorithm.
+
+Environment:
+	we will uesd the ubuntu enviroment and the command of the ubuntu ,if you have a windows enviroment,
+	you should install the ubuntu on virtual box or VMware.
+
+How to Run Your Program:
+	you should have the three files in one folder(HW3.c , HW3.h ,test.txt) ,open the terminal and begun to send this comman to compile and run the code:
+	1) gcc  HW3.c
+	2) ./a.out test.txt
+	
+	after that you can see the resurt off all the tasks based on the scheduling algorithm.
