@@ -1,63 +1,38 @@
+//auther :mohammed abbas id:208172569
 #include "main.h"
-#include <stdio.h>
-#include <readline/readline.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <sys/wait.h>
-#define LENGTH 1000
-#define ARR 100
-
-void parse(char* input,char** userCmd, int* length){// function for exeargsS
-         char cmd[ARR][LENGTH];
-   char *found;
-    int i=0;
-
-    while( (found = strsep(&input," ")) != NULL ) {
-
-        strcpy(cmd[i], found);
-        userCmd[i] = cmd[i];
-        i++;
-    }
-    length=&i;
-    userCmd[*length]=NULL;
 
 
-}
+int main (int argc, char **argv)
+ {
 
-int main (int argc, char **argv){ 
-while(1){
-int length = 0;
-int childPid; 
-char ** cmdLine=(char**)malloc(ARR * sizeof(char*)) ; 
-char info[LENGTH]; 
- 
-
-	printf(" %s:%s > ",getenv("USER"),getenv("PWD"));
-	gets(info);
-
-	if(strcmp(info,"exit") == 0){
+    printf("------------- starting custom shell --------------------- \n");
+    printf("------------- -------------------- --------------------- \n");
+	int childPid; 
+      while (1) {
+        int length = 0;
+        printCurrentPath(); // print the crruent path
+        char user[MAXLENGTH];
+        char **cmd =(char**)malloc(MAXARR * sizeof(char*)) ;
+        gets(user); //the command that we write
+        if(strcmp(user,"exit") == 0){
                 break;
+        }else{
+        execArgs(user, cmd, &length);
+	    childPid = fork();
+        if ( childPid == 0) {
+                if (execvp(cmd[0],cmd) == -1) {
+                    printf("command is not execute .. ");
+			printf("\n");
+                }
+                exit(0);
+            }
+        else {
+            wait(NULL);
         }
-        else{
-        	parse(info, cmdLine, &length);
-        	childPid = fork();
-		if (childPid == 0)
-			{
-                	if (execvp(cmdLine[0],cmdLine) == -1) {
-                    		printf("Error! command is not executing ");
-				printf("\n");}
-				exit(0);			
-		}
+        }
 
-		else 
-		{ 
-  			wait(NULL);         
-		}	 
- 	} 
-    
-    
-     }
-     
-     
-     
-}
+
+
+ }
+ }
+
